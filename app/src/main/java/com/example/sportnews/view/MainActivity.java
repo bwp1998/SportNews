@@ -1,6 +1,8 @@
 package com.example.sportnews.view;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -20,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private NewsAdapter adapter;
     private RecyclerView recyclerView;
-    //    private ProgressBar progressBar;
+    private ProgressBar progressBar;
+    int progress = 0;
 
     private static final String COUNTRY = "id";
     private static final String CATEGORY = "sports";
@@ -31,17 +34,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.rv_piggy);
-//        progressBar = findViewById(R.id.progress_bar);
-
+        progressBar = findViewById(R.id.progress_bar);
+        setProgressValue(progress);
         NewsViewModel newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
         newsViewModel.setNews(COUNTRY,CATEGORY);
         newsViewModel.getNews().observe(this, newsRequest -> {
             List<NewsResult> list = newsRequest.getResult();
             results.addAll(list);
             adapter.notifyDataSetChanged();
+            progressBar.setVisibility(View.GONE);
         });
 
         setupRecyclerview();
+    }
+
+    private void setProgressValue(final int progress) {
+
+        // set the progress
+        progressBar.setProgress(progress);
+        // thread is used to change the progress value
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setProgressValue(progress + 10);
+            }
+        });
+        thread.start();
     }
 
     private void setupRecyclerview() {
@@ -51,9 +74,12 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setNestedScrollingEnabled(true);
+
         } else {
             adapter.notifyDataSetChanged();
         }
 
     }
+
+
 }

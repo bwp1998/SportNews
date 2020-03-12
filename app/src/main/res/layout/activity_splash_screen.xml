@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_sport"
     tools:context=".view.SplashScreenActivity">
 
     <LinearLayout
@@ -19,8 +20,8 @@
 
 
         <ImageView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="217dp"
+            android:layout_height="249dp"
             android:contentDescription="@string/todo"
             android:src="@drawable/img_logo" />
 
@@ -28,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="@color/colorWhiteSoft"
+            android:textColor="@color/colorBlue"
+            android:textStyle="bold"
             android:textSize="28sp"
             tools:layout_editor_absoluteX="142dp"
             tools:layout_editor_absoluteY="414dp" />

@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingBottom="16dp">
 
         <ImageView
@@ -24,8 +24,7 @@
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/todo"
             android:scaleType="fitXY"
-            android:src="@drawable/img_placeholder"
-            />
+            android:src="@drawable/img_placeholder" />
 
         <TextView
             android:id="@+id/tv_piggy"
@@ -33,11 +32,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_piggy"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="-89dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:background="#99000000"
             android:fontFamily="@font/mmedium"
             android:text="@string/title_news"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -57,6 +58,8 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/mregular"
                 android:maxLines="1"
+                android:background="#99000000"
+                android:textColor="@color/white"
                 android:text="@string/author"
                 android:textStyle="bold" />
 
@@ -64,8 +67,10 @@
                 android:id="@+id/tv_relaseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:fontFamily="@font/mlight"
-                android:text="@string/release_date"/>
+                android:background="#99000000"
+                android:text="@string/release_date" />
 
         </LinearLayout>
     </RelativeLayout>

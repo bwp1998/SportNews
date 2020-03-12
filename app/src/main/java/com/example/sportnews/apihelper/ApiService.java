@@ -1,6 +1,6 @@
-package com.example.alqur_anapp.apihelper;
+package com.example.sportnews.apihelper;
 
-import com.example.alqur_anapp.model.NewsRequest;
+import com.example.sportnews.model.NewsRequest;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -9,6 +9,7 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("top-headlines")
-    Call<NewsRequest> getNewsList(@Query("sources")String source,
-                                  @Query("apiKey")String apiKey);
+    Call<NewsRequest> getNewsList(@Query("country") String country,
+                                  @Query("category") String source,
+                                  @Query("apiKey") String apiKey);
 }

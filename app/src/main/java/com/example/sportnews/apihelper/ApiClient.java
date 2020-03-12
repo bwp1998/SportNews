@@ -1,4 +1,4 @@
-package com.example.alqur_anapp.apihelper;
+package com.example.sportnews.apihelper;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

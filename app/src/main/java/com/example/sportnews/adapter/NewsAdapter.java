@@ -1,4 +1,4 @@
-package com.example.alqur_anapp.adapter;
+package com.example.sportnews.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,19 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.alqur_anapp.R;
-import com.example.alqur_anapp.model.NewsRequest;
-import com.example.alqur_anapp.model.NewsResult;
-import com.example.alqur_anapp.view.CustomOnItemListener;
-import com.example.alqur_anapp.view.DetailArticleActivity;
-import com.example.alqur_anapp.view.MainActivity;
+import com.example.sportnews.R;
+import com.example.sportnews.model.NewsResult;
+import com.example.sportnews.view.CustomOnItemListener;
+import com.example.sportnews.view.DetailArticleActivity;
 
 import java.util.ArrayList;
 

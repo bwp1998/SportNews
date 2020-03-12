@@ -1,4 +1,4 @@
-package com.example.alqur_anapp.apihelper;
+package com.example.sportnews.apihelper;
 
 public class UtilsApi {
 

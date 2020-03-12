@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
     tools:context=".view.SplashScreenActivity">
 
     <LinearLayout
@@ -20,10 +19,10 @@
 
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_newspaper" />
+            android:src="@drawable/img_logo" />
 
         <TextView
             android:layout_width="wrap_content"

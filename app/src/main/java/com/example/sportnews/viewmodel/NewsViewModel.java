@@ -35,6 +35,23 @@ public class NewsViewModel extends ViewModel {
                 Log.e("onFailure", t.getMessage());
             }
         });
+
+    }
+
+    public void searchNews(String country, String category, String key){
+        ApiService mApiService = UtilsApi.getApiService();
+        Call<NewsRequest> call = mApiService.searchNewsList(country,category,key,API_TOKEN);
+        call.enqueue(new Callback<NewsRequest>() {
+            @Override
+            public void onResponse(Call<NewsRequest> call, Response<NewsRequest> response) {
+                Log.d("onResponse", response.body().getStatus());
+                liveDataNews.setValue(response.body());
+            }
+            @Override
+            public void onFailure(Call<NewsRequest> call, Throwable t) {
+                Log.e("onFailure", t.getMessage());
+            }
+        });
     }
 
     public LiveData<NewsRequest> getNews(){

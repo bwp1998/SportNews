@@ -21,4 +21,6 @@
 
     <string name="home_second">Home Second</string>
     <string name="Powered"><![CDATA[Powered by BWP & GSG]]></string>
+    <string name="search_hint" />
+    <string name="app_label" />
 </resources>

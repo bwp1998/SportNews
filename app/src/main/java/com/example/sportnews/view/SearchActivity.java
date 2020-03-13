@@ -1,25 +1,19 @@
 package com.example.sportnews.view;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MenuItemCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.example.sportnews.R;
-import com.example.sportnews.SearchActivity;
 import com.example.sportnews.adapter.NewsAdapter;
 import com.example.sportnews.model.NewsResult;
 import com.example.sportnews.viewmodel.NewsViewModel;
@@ -27,7 +21,7 @@ import com.example.sportnews.viewmodel.NewsViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
     private NewsAdapter adapter;
     private RecyclerView recyclerView;
@@ -35,22 +29,23 @@ public class MainActivity extends AppCompatActivity {
     int progress = 0;
     private Activity activity;
     Menu menu;
-
-
     private static final String COUNTRY = "id";
     private static final String CATEGORY = "sports";
     private ArrayList<NewsResult> results = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.rv_piggy);
         progressBar = findViewById(R.id.progress_bar);
         setProgressValue(progress);
         NewsViewModel newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-        newsViewModel.setNews(COUNTRY,CATEGORY);
+//        newsViewModel.setNews(COUNTRY,CATEGORY);
+        newsViewModel.searchNews(COUNTRY,CATEGORY,"England");
         newsViewModel.getNews().observe(this, newsRequest -> {
             List<NewsResult> list = newsRequest.getResult();
             results.addAll(list);
@@ -65,14 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent goToSearch = new Intent(MainActivity.this,SearchActivity.class);
-        startActivity(goToSearch);
+        inflater.inflate(R.menu.menu_search2, menu);
         return true;
     }
 
@@ -97,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecyclerview() {
         if (adapter == null) {
-            adapter = new NewsAdapter(MainActivity.this, results);
+            adapter = new NewsAdapter(SearchActivity.this, results);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -106,8 +94,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             adapter.notifyDataSetChanged();
         }
-
     }
-
-
 }

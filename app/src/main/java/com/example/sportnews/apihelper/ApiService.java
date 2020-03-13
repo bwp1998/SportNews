@@ -12,4 +12,10 @@ public interface ApiService {
     Call<NewsRequest> getNewsList(@Query("country") String country,
                                   @Query("category") String source,
                                   @Query("apiKey") String apiKey);
+
+    @GET("top-headlines")
+    Call<NewsRequest> searchNewsList(@Query("country") String country,
+                                  @Query("category") String source,
+                                  @Query("q") String key,
+                                  @Query("apiKey") String apiKey);
 }

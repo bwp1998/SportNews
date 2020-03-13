@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sportnews.R;
+import com.example.sportnews.SearchActivity;
 import com.example.sportnews.adapter.NewsAdapter;
 import com.example.sportnews.model.NewsResult;
 import com.example.sportnews.viewmodel.NewsViewModel;

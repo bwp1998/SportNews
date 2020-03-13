@@ -1,6 +1,7 @@
 package com.example.sportnews.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +11,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.sportnews.R;
 import com.example.sportnews.adapter.NewsAdapter;
@@ -26,6 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     private NewsAdapter adapter;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
+    private NewsViewModel newsViewModel;
     int progress = 0;
     private Activity activity;
     Menu menu;
@@ -42,10 +47,22 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.rv_piggy);
         progressBar = findViewById(R.id.progress_bar);
-        setProgressValue(progress);
-        NewsViewModel newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-//        newsViewModel.setNews(COUNTRY,CATEGORY);
-        newsViewModel.searchNews(COUNTRY,CATEGORY,"England");
+
+        newsViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+
+//        newsViewModel.getNews().observe(this, newsRequest -> {
+//            List<NewsResult> list = newsRequest.getResult();
+//            results.addAll(list);
+//            adapter.notifyDataSetChanged();
+//            progressBar.setVisibility(View.GONE);
+//        });
+
+        setupRecyclerview();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         newsViewModel.getNews().observe(this, newsRequest -> {
             List<NewsResult> list = newsRequest.getResult();
             results.addAll(list);
@@ -53,7 +70,6 @@ public class SearchActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         });
 
-        setupRecyclerview();
     }
 
     @Override
@@ -61,6 +77,23 @@ public class SearchActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search2, menu);
+        MenuItem searchViewItem = menu.findItem(R.id.app_bar_search2);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Toast.makeText(SearchActivity.this, query, Toast.LENGTH_SHORT).show();
+                setProgressValue(progress);
+                results.clear();
+                newsViewModel.searchNews(COUNTRY, CATEGORY, query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 
